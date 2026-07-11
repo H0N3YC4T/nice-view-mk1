@@ -21,9 +21,7 @@ enum nice_view_theme {
 bool nice_view_animation_is_enabled(void);
 
 /**
- * @brief One-time init hook (optional; currently does not draw).
- *
- * Call this during your display/widget init if you want a formal init step.
+ * @brief Recompute the art offset and redraw on the bound screen (no-op if unbound).
  */
 void nice_view_theme_redraw(void);
 
@@ -36,12 +34,9 @@ void nice_view_theme_redraw(void);
 void nice_view_bind_screen(lv_obj_t *screen);
 
 /**
- * @brief Draw the current theme onto the given canvas object.
- *
- * This does NOT remember the canvas; it just draws into the one you pass.
- * Theme and animation state are taken from the nice_view_* API.
+ * @brief (Re)create the art object as a child of `parent` (the screen widget obj).
  */
-void draw_animation(lv_obj_t *canvas);
+void draw_animation(lv_obj_t *parent);
 
 /**
  * @brief Set the current theme and redraw (if a screen is bound).

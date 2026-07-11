@@ -42,13 +42,17 @@ static void draw_top(lv_obj_t *widget, const struct status_state *state) {
 
 static void set_battery_status(struct zmk_widget_screen *widget,
                                struct battery_status_state state) {
+    bool changed = widget->state.battery != state.level;
 #if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
+    changed = changed || widget->state.charging != state.usb_present;
     widget->state.charging = state.usb_present;
 #endif /* IS_ENABLED(CONFIG_USB_DEVICE_STACK) */
 
     widget->state.battery = state.level;
 
-    draw_top(widget->obj, &widget->state);
+    if (changed) {
+        draw_top(widget->obj, &widget->state);
+    }
 }
 
 static void battery_status_update_cb(struct battery_status_state state) {
@@ -85,6 +89,9 @@ static struct peripheral_status_state get_state(const zmk_event_t *_eh) {
 
 static void set_connection_status(struct zmk_widget_screen *widget,
                                   struct peripheral_status_state state) {
+    if (widget->state.connected == state.connected) {
+        return;
+    }
     widget->state.connected = state.connected;
 
     draw_top(widget->obj, &widget->state);

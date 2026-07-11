@@ -1,6 +1,7 @@
 // widgets/animation.c
 #include <stdlib.h>
 #include <zephyr/kernel.h>
+#include <zephyr/random/random.h>
 #include <lvgl.h>
 #include <zmk/display.h>
 
@@ -126,10 +127,8 @@ void draw_animation(lv_obj_t *canvas) {
         art_obj = NULL;
     }
 
-    if (nice_view_animation) {
+    if (IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION) && nice_view_animation) {
         art_obj = lv_animimg_create(canvas);
-        lv_obj_center(art_obj);
-
         lv_animimg_set_src(art_obj, (const void **)frames, frame_count);
         // Total loop time = per-frame dwell * frame count, so adding/removing
         // frames keeps the same speed and slideshows stay slow.
@@ -138,7 +137,9 @@ void draw_animation(lv_obj_t *canvas) {
         lv_animimg_start(art_obj);
     } else {
         art_obj = lv_img_create(canvas);
-        uint32_t idx = k_uptime_get_32() % frame_count;
+        // sys_rand32: boot-time uptime is near-deterministic, so uptime % count
+        // showed almost the same frame every boot
+        uint32_t idx = sys_rand32_get() % frame_count;
         lv_img_set_src(art_obj, frames[idx]);
     }
 
@@ -148,6 +149,10 @@ void draw_animation(lv_obj_t *canvas) {
 /* -------------------------------------------------------------------------- */
 /* Hotkey: cycle_animation behavior event                                     */
 /* -------------------------------------------------------------------------- */
+/* Currently inert end-to-end: behaviors run on the CENTRAL, which doesn't build
+ * this shield, and ZMK events don't cross the split -- so this listener never
+ * fires on a peripheral. Kept as the working half of a future relay (see the
+ * keyboard repo's dev/periph-theme reference). */
 
 static int nice_view_cycle_animation_listener(const zmk_event_t *eh) {
     const struct cycle_animation_state_changed *ev = as_cycle_animation_state_changed(eh);
@@ -157,12 +162,12 @@ static int nice_view_cycle_animation_listener(const zmk_event_t *eh) {
 
     switch (ev->type) {
     case NVC_NEXT:
-        nice_view_animation = true;
+        nice_view_animation = IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION);
         nice_view_theme_set((nice_view_theme_get() + 1) % NICE_VIEW_THEME_COUNT);
         nice_view_theme_redraw();
         break;
     case NVC_PREV:
-        nice_view_animation = true;
+        nice_view_animation = IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION);
         nice_view_theme_set((nice_view_theme_get() + NICE_VIEW_THEME_COUNT - 1) %
                             NICE_VIEW_THEME_COUNT);
         nice_view_theme_redraw();
