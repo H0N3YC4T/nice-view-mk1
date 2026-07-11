@@ -1,0 +1,8 @@
+name: nice-view-mk1
+build:
+  cmake: .
+  settings:
+    board_root: .
+    dts_root: .
+  depends:
+    - lvgl
