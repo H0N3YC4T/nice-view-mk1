@@ -108,8 +108,8 @@ static void calc_offset_for_theme(enum nice_view_theme theme) {
 /* Main draw implementation                                                   */
 /* -------------------------------------------------------------------------- */
 
-void draw_animation(lv_obj_t *canvas) {
-    if (!canvas) {
+void draw_animation(lv_obj_t *parent) {
+    if (!parent) {
         return;
     }
 
@@ -130,7 +130,7 @@ void draw_animation(lv_obj_t *canvas) {
 #if IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION)
     /* Preprocessor-gated: with LV_USE_ANIMIMG=n the animimg API has no declarations. */
     if (nice_view_animation) {
-        art_obj = lv_animimg_create(canvas);
+        art_obj = lv_animimg_create(parent);
         lv_animimg_set_src(art_obj, (const void **)frames, frame_count);
         // Total loop time = per-frame dwell * frame count, so adding/removing
         // frames keeps the same speed and slideshows stay slow.
@@ -142,7 +142,7 @@ void draw_animation(lv_obj_t *canvas) {
     }
 #endif /* IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION) */
 
-    art_obj = lv_img_create(canvas);
+    art_obj = lv_img_create(parent);
     // sys_rand32: boot-time uptime is near-deterministic, so uptime % count
     // showed almost the same frame every boot
     uint32_t idx = sys_rand32_get() % frame_count;

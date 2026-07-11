@@ -129,6 +129,10 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget_battery_status_init();
     widget_peripheral_status_init();
 
+    /* Initial paint regardless of the change-guards above -- at boot the zeroed
+     * widget state can match the first reported values, which would skip it. */
+    draw_top(widget->obj, &widget->state);
+
     return 0;
 }
 
