@@ -1,7 +1,7 @@
 # Change ledger — nice-view-mk1
 
 Everything this module changes on top of M165437/nice-view-gem, in one place. Companion docs
-live in the keyboard repo (Keyboard-Prototype_Mk1: docs/information.md + docs/issues.md).
+live in the keyboard repo (prototype-mk1: docs/information.md; the old issues.md is retired, see its git history).
 Consumed by the keyboard repo via `revision: main` in `config/west.yml`.
 
 ## Extraction + rename (2026-07-11)
