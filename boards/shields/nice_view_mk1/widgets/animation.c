@@ -127,7 +127,9 @@ void draw_animation(lv_obj_t *canvas) {
         art_obj = NULL;
     }
 
-    if (IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION) && nice_view_animation) {
+#if IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION)
+    /* Preprocessor-gated: with LV_USE_ANIMIMG=n the animimg API has no declarations. */
+    if (nice_view_animation) {
         art_obj = lv_animimg_create(canvas);
         lv_animimg_set_src(art_obj, (const void **)frames, frame_count);
         // Total loop time = per-frame dwell * frame count, so adding/removing
@@ -135,14 +137,16 @@ void draw_animation(lv_obj_t *canvas) {
         lv_animimg_set_duration(art_obj, nice_view_anim_frame_ms[theme] * frame_count);
         lv_animimg_set_repeat_count(art_obj, LV_ANIM_REPEAT_INFINITE);
         lv_animimg_start(art_obj);
-    } else {
-        art_obj = lv_img_create(canvas);
-        // sys_rand32: boot-time uptime is near-deterministic, so uptime % count
-        // showed almost the same frame every boot
-        uint32_t idx = sys_rand32_get() % frame_count;
-        lv_img_set_src(art_obj, frames[idx]);
+        lv_obj_align(art_obj, LV_ALIGN_TOP_LEFT, nice_view_theme_offset, 0);
+        return;
     }
+#endif /* IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION) */
 
+    art_obj = lv_img_create(canvas);
+    // sys_rand32: boot-time uptime is near-deterministic, so uptime % count
+    // showed almost the same frame every boot
+    uint32_t idx = sys_rand32_get() % frame_count;
+    lv_img_set_src(art_obj, frames[idx]);
     lv_obj_align(art_obj, LV_ALIGN_TOP_LEFT, nice_view_theme_offset, 0);
 }
 
