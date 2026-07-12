@@ -4,6 +4,27 @@ Everything this module changes on top of M165437/nice-view-gem, in one place. Co
 live in the keyboard repo (prototype-mk1: docs/information.md; the old issues.md is retired, see its git history).
 Consumed by the keyboard repo via `revision: main` in `config/west.yml`.
 
+## Theme switching wired + peripheral battery tick (2026-07-12)
+
+**Why switching never worked:** the `cycle_animation` behavior already had
+`BEHAVIOR_LOCALITY_GLOBAL` (central invokes it locally AND relays it to every peripheral),
+but ZMK's BLE split relay carries the behavior's DEVICE NAME in a 9-byte field
+(`ZMK_SPLIT_RUN_BEHAVIOR_DEV_LEN`) -- `cycle_animation` (15 chars) was truncated to
+`cycle_an` on the wire, the peripheral's behavior lookup failed, and the only symptom was a
+LOG_ERR nobody had enabled. Same constraint upstream documents on its own reset behaviors
+("name must be <= 8 characters": `sysreset`, `bootload`).
+
+**Fix (keyboard-repo side):** rename the keymap NODE to `nvcycle` (7 chars) -- the C label
+`cycle_animation:` and every `&cycle_animation NVC_*` binding stay unchanged. Also set
+`NICE_VIEW_MK1_TRANSMUTATION_ONLY=n` on the halves so all six themes are compiled to switch
+between. On the module side nothing was needed: the peripheral listener, redraw path and
+locality were already correct. In static mode (`NICE_VIEW_ANIMATION=n`) NVC_NEXT/PREV pick a
+random frame of the next/prev theme; NVC_PAUSE reshuffles the current theme's frame.
+
+**Battery:** `ZMK_DISPLAY_TICK_PERIOD_MS` defaults to 100ms for this shield (ZMK default is
+10ms -- 100 display-thread wakeups/second driving lv_task_handler for a screen that only
+changes on events). 33ms when `NICE_VIEW_ANIMATION=y` so the loop stays ~30fps.
+
 ## Extraction + rename (2026-07-11)
 
 Moved out of Keyboard-Prototype_Mk1 (where it lived vendored at `boards/shields/nice_view_gem`

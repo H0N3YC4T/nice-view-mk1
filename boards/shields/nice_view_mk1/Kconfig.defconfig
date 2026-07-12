@@ -1,5 +1,13 @@
 if SHIELD_NICE_VIEW_MK1
 
+# The peripheral screen is event-driven (static art; redraws only on battery /
+# connection / theme events), so ZMK's default 10ms LVGL tick is ~100 wasted
+# display-thread wakeups per second. 100ms adds at most 100ms of redraw latency
+# (imperceptible here) and cuts those wakeups 10x. Animations need ~30fps.
+config ZMK_DISPLAY_TICK_PERIOD_MS
+    default 33 if NICE_VIEW_ANIMATION
+    default 100
+
 config LV_Z_VDB_SIZE
     default 100
 
