@@ -34,8 +34,8 @@ cut and the peripheral-side lookup fails (theme keys then do nothing on the halv
 ## Themes
 
 Six frame sets ship in `boards/shields/nice_view_mk1/assets/animations/`: transmutation
-(default), crystal, landscape, evangelion, omnissiah, ultramar. **Theme switching is currently
-paused**: peripherals show a single static transmutation frame
+(default), crystal, landscape, evangelion, omnissiah, ultramar. By default peripherals show a
+single static transmutation frame
 (`NICE_VIEW_MK1_TRANSMUTATION_ONLY=y` compiles only that theme's bitmaps to save flash;
 `NICE_VIEW_ANIMATION=n` keeps it static to save battery). **Theme switching over the split was
 wired end-to-end on 2026-07-12** (root cause of it never working: the behavior node's 15-char
