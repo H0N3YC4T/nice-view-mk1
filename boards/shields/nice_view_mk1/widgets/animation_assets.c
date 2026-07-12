@@ -6,8 +6,6 @@
 
 #define NICE_VIEW_ANIM_ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
-// TEMP (CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY): gate out the non-transmutation
-// theme bitmaps to slim the peripheral build. Set the Kconfig to n to restore.
 #if !CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY
 // -------------------------------------------------------------------------------
 // crystal theme (assets/animations/crystal.c)

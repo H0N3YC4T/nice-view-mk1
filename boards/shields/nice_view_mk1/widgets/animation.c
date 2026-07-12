@@ -67,9 +67,7 @@ void nice_view_theme_redraw(void) {
 
 void nice_view_theme_set(enum nice_view_theme theme) {
 #ifdef CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY
-    // Transmutation-only mode: cycling (next/prev) funnels through here, so
-    // force the value to keep the display pinned to the only compiled theme.
-    theme = NICE_VIEW_THEME_TRANSMUTATION;
+    theme = NICE_VIEW_THEME_TRANSMUTATION; /* only compiled theme */
 #endif
     if (theme >= NICE_VIEW_THEME_COUNT) {
         theme = NICE_VIEW_THEME_CRYSTAL;
@@ -127,8 +125,7 @@ void draw_animation(lv_obj_t *parent) {
         art_obj = NULL;
     }
 
-#if IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION)
-    /* Preprocessor-gated: with LV_USE_ANIMIMG=n the animimg API has no declarations. */
+#if IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION) /* animimg API undeclared when =n */
     if (nice_view_animation) {
         art_obj = lv_animimg_create(parent);
         lv_animimg_set_src(art_obj, (const void **)frames, frame_count);
@@ -143,9 +140,7 @@ void draw_animation(lv_obj_t *parent) {
 #endif /* IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION) */
 
     art_obj = lv_img_create(parent);
-    // sys_rand32: boot-time uptime is near-deterministic, so uptime % count
-    // showed almost the same frame every boot
-    uint32_t idx = sys_rand32_get() % frame_count;
+    uint32_t idx = sys_rand32_get() % frame_count; // random frame per boot
     lv_img_set_src(art_obj, frames[idx]);
     lv_obj_align(art_obj, LV_ALIGN_TOP_LEFT, nice_view_theme_offset, 0);
 }
@@ -153,11 +148,6 @@ void draw_animation(lv_obj_t *parent) {
 /* -------------------------------------------------------------------------- */
 /* Hotkey: cycle_animation behavior event                                     */
 /* -------------------------------------------------------------------------- */
-/* Currently inert end-to-end: behaviors run on the CENTRAL, which doesn't build
- * this shield, and ZMK events don't cross the split -- so this listener never
- * fires on a peripheral. Kept as the working half of a future relay (see the
- * keyboard repo's dev/periph-theme reference). */
-
 static int nice_view_cycle_animation_listener(const zmk_event_t *eh) {
     const struct cycle_animation_state_changed *ev = as_cycle_animation_state_changed(eh);
     if (ev == NULL) {

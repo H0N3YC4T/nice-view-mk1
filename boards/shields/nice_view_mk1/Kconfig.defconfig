@@ -1,9 +1,6 @@
 if SHIELD_NICE_VIEW_MK1
 
-# The peripheral screen is event-driven (static art; redraws only on battery /
-# connection / theme events), so ZMK's default 10ms LVGL tick is ~100 wasted
-# display-thread wakeups per second. 100ms adds at most 100ms of redraw latency
-# (imperceptible here) and cuts those wakeups 10x. Animations need ~30fps.
+# Event-driven screen: 100ms tick (vs ZMK's 10ms) cuts idle wakeups 10x
 config ZMK_DISPLAY_TICK_PERIOD_MS
     default 33 if NICE_VIEW_ANIMATION
     default 100
@@ -43,17 +40,12 @@ config NICE_VIEW_MK1_WPM_FIXED_RANGE_MAX
     int "Fixed range maximum for WPM gauge/chart"
     default 100
 
-# --- Peripheral artwork. Theme switching is PAUSED (full multi-theme system
-# --- is backed up on the keyboard repo: Keyboard-Prototype_Mk1 branch dev/periph-theme): the halves show a single static
-# --- random transmutation frame to save battery. default n = static (no loop).
+# default n = single static frame (battery)
 config NICE_VIEW_ANIMATION
     bool "Animate the peripheral artwork (vs. a single static frame)"
     default n
 
-# Compile ONLY the transmutation theme's bitmaps (drops the other five to save
-# peripheral flash) and lock the display to it. default y = transmutation-only. Set
-# to n (+ NICE_VIEW_ANIMATION=y) to restore the full multi-theme switching system.
-# Pairs with the matching lock in animation.c, gated on this same symbol.
+# y = only transmutation's bitmaps compiled + theme locked (slim flash)
 config NICE_VIEW_MK1_TRANSMUTATION_ONLY
     bool "Compile only the transmutation theme (slim the peripheral build)"
     default y

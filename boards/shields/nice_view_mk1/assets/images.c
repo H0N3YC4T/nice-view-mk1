@@ -79,8 +79,7 @@ const lv_img_dsc_t bt_no_signal = {
     .data = bt_no_signal_map,
 };
 
-// Everything below is only drawn by central builds (output/wpm/profile widgets)
-// -- gate the bitmaps identically so peripherals don't carry them
+// central-only bitmaps (output/wpm/profile widgets)
 #if !defined(CONFIG_ZMK_SPLIT) || defined(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
 #ifndef LV_ATTRIBUTE_IMG_BT_UNBONDED
 #define LV_ATTRIBUTE_IMG_BT_UNBONDED
