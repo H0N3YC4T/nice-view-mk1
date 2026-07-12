@@ -4,7 +4,7 @@ Everything this module changes on top of M165437/nice-view-gem, in one place. Co
 live in the keyboard repo (prototype-mk1: docs/information.md; the old issues.md is retired, see its git history).
 Consumed by the keyboard repo via `revision: main` in `config/west.yml`.
 
-## Theme switching wired + peripheral battery tick (2026-07-12)
+## Theme switching wired + peripheral battery tick (2026-07-12, HARDWARE-VERIFIED same day)
 
 **Why switching never worked:** the `cycle_animation` behavior already had
 `BEHAVIOR_LOCALITY_GLOBAL` (central invokes it locally AND relays it to every peripheral),
