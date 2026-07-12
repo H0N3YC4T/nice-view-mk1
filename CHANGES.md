@@ -43,6 +43,6 @@ No functional changes in the move.
 - Theme switching PAUSED: peripherals show one static transmutation frame
   (`NICE_VIEW_ANIMATION=n`, `NICE_VIEW_MK1_TRANSMUTATION_ONLY=y` gates the other five themes'
   bitmaps out of the build). Full switching system backed up on the keyboard repo's
-  `dev/periph-theme` branch; switching never worked end-to-end on hardware -- treat as a
+  `dev/periph-theme` branch; switching WORKS since 2026-07-12 (see entry above) -- the old branch is just a
   design reference, not a working feature.
 - WPM gauge fixed-range option (`NICE_VIEW_MK1_WPM_FIXED_RANGE`, max default 100).
