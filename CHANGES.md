@@ -21,10 +21,10 @@ between. On the module side nothing was needed: the peripheral listener, redraw 
 locality were already correct. In static mode (`NICE_VIEW_ANIMATION=n`) NVC_NEXT/PREV pick a
 random frame of the next/prev theme; NVC_PAUSE reshuffles the current theme's frame.
 
-**Theme trim (2026-07-13):** crystal and ultramar dropped from the rotation on request --
-removed from the enum, asset tables, Kconfig choice and CMake; the frame sources stay on
-disk (recoverable by reverting this commit). Rotation is now transmutation / landscape /
-evangelion / omnissiah; fallback theme is transmutation.
+**Theme trim (2026-07-13):** crystal and ultramar dropped on request -- removed from the
+enum, asset tables, Kconfig choice, CMake and the frame sources deleted (recoverable from
+git history). Rotation is now transmutation / landscape / evangelion / omnissiah; fallback
+theme is transmutation.
 
 **Play/stop toggle (2026-07-13):** NVC_PAUSE now toggles the animation instead of only
 reshuffling the frame. `NICE_VIEW_ANIMATION=y` compiles the animation engine;

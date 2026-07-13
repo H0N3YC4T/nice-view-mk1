@@ -33,9 +33,8 @@ cut and the peripheral-side lookup fails (theme keys then do nothing on the halv
 
 ## Themes
 
-Four frame sets are compiled from `boards/shields/nice_view_mk1/assets/animations/`:
-transmutation (default), landscape, evangelion, omnissiah (crystal and ultramar remain on
-disk but are dropped from the build and rotation). By default peripherals show a
+Four frame sets ship in `boards/shields/nice_view_mk1/assets/animations/`: transmutation
+(default), landscape, evangelion, omnissiah. By default peripherals show a
 single static transmutation frame
 (`NICE_VIEW_MK1_TRANSMUTATION_ONLY=y` compiles only that theme's bitmaps to save flash;
 `NICE_VIEW_ANIMATION=n` compiles the animation engine out to save battery). With
