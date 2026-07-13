@@ -40,6 +40,11 @@ static const struct behavior_parameter_value_metadata param_values[] = {
         .value = NVC_PAUSE,
         .type = BEHAVIOR_PARAMETER_VALUE_TYPE_VALUE,
     },
+    {
+        .display_name = "Random Frame",
+        .value = NVC_SHUF,
+        .type = BEHAVIOR_PARAMETER_VALUE_TYPE_VALUE,
+    },
 };
 
 static const struct behavior_parameter_metadata_set param_metadata_set[] = {{
@@ -61,6 +66,7 @@ static int on_keymap_binding_pressed(struct zmk_behavior_binding *binding,
     case NVC_NEXT:
     case NVC_PREV:
     case NVC_PAUSE:
+    case NVC_SHUF:
         // ZMK 4.1: raise_<event>(struct) replaces the old
         // new_<event>() + ZMK_EVENT_RAISE(*evt) pattern.
         return raise_cycle_animation_state_changed(

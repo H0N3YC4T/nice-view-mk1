@@ -27,7 +27,9 @@ new `NICE_VIEW_ANIMATION_AUTOSTART` (default y) picks the boot state -- the halv
 `AUTOSTART=n` so they boot paused on a random static frame and NVC_PAUSE starts/stops the
 show. NVC_NEXT/PREV keep the current play state across theme changes; stopping lands on a
 fresh random frame (the animimg frame index isn't exposed to freeze in place). In a
-static-only build (`ANIMATION=n`) NVC_PAUSE still just reshuffles.
+static-only build (`ANIMATION=n`) NVC_PAUSE still just reshuffles. New `NVC_SHUF` param:
+a new random static frame of the current theme (pauses if playing) -- the old PAUSE
+semantics under a new code.
 
 **Battery:** `ZMK_DISPLAY_TICK_PERIOD_MS` defaults to 100ms for this shield (ZMK default is
 10ms -- 100 display-thread wakeups/second driving lv_task_handler for a screen that only

@@ -165,6 +165,11 @@ static int nice_view_cycle_animation_listener(const zmk_event_t *eh) {
         nice_view_animation = !nice_view_animation && IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION);
         nice_view_theme_redraw();
         break;
+    case NVC_SHUF:
+        // new random frame of the current theme (pauses if playing)
+        nice_view_animation = false;
+        nice_view_theme_redraw();
+        break;
     default:
         break;
     }

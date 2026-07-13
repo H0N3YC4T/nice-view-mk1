@@ -4,9 +4,10 @@
 #include <zephyr/kernel.h>
 #include <zmk/event_manager.h>
 
-#define NVC_PAUSE 0   // freeze on a random static frame of the current theme
-#define NVC_NEXT  1   // forwards: next theme (resume play)
-#define NVC_PREV  2   // backwards: previous theme (resume play)
+#define NVC_PAUSE 0   // play/stop toggle
+#define NVC_NEXT  1   // next theme (keeps play state)
+#define NVC_PREV  2   // previous theme (keeps play state)
+#define NVC_SHUF  3   // new random static frame of the current theme (pauses)
 
 struct cycle_animation_state_changed {
     int type;

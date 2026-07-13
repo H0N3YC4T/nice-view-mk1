@@ -25,7 +25,7 @@ build.yaml (per half):
 ```
 
 The `cycle_animation` behavior (`zmk,behavior-cycle-animation`, params `NVC_PAUSE` /
-`NVC_NEXT` / `NVC_PREV`, see `include/zmk/behaviors/cycle_animation.h`) compiles whenever a
+`NVC_NEXT` / `NVC_PREV` / `NVC_SHUF`, see `include/zmk/behaviors/cycle_animation.h`) compiles whenever a
 keymap declares its node — bind it like any behavior. **The DT node NAME must be 8 characters
 or fewer** (e.g. `cycle_animation: nvcycle { ... }`): the behavior is GLOBAL-locality, and
 ZMK's BLE split relay truncates device names to 8 chars + NUL — a longer node name is silently
