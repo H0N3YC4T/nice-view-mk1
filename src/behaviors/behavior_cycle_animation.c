@@ -36,7 +36,7 @@ static const struct behavior_parameter_value_metadata param_values[] = {
         .type = BEHAVIOR_PARAMETER_VALUE_TYPE_VALUE,
     },
     {
-        .display_name = "Pause (Static Frame)",
+        .display_name = "Play/Pause",
         .value = NVC_PAUSE,
         .type = BEHAVIOR_PARAMETER_VALUE_TYPE_VALUE,
     },

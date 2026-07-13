@@ -25,12 +25,8 @@ static enum nice_view_theme current_theme = NICE_VIEW_THEME_ULTRAMAR;
 static enum nice_view_theme current_theme = NICE_VIEW_THEME_CRYSTAL;
 #endif
 
-// Animation movement state
-#if IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION)
-static bool nice_view_animation = true;
-#else
-static bool nice_view_animation = false;
-#endif
+// Animation movement state (NVC_PAUSE toggles it at runtime)
+static bool nice_view_animation = IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION_AUTOSTART);
 
 // Horizontal offset for centering the animation
 static lv_coord_t nice_view_theme_offset = 1;
@@ -156,18 +152,17 @@ static int nice_view_cycle_animation_listener(const zmk_event_t *eh) {
 
     switch (ev->type) {
     case NVC_NEXT:
-        nice_view_animation = IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION);
         nice_view_theme_set((nice_view_theme_get() + 1) % NICE_VIEW_THEME_COUNT);
         nice_view_theme_redraw();
         break;
     case NVC_PREV:
-        nice_view_animation = IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION);
         nice_view_theme_set((nice_view_theme_get() + NICE_VIEW_THEME_COUNT - 1) %
                             NICE_VIEW_THEME_COUNT);
         nice_view_theme_redraw();
         break;
     case NVC_PAUSE:
-        nice_view_animation = false;
+        // play/stop toggle; stopping lands on a fresh random frame
+        nice_view_animation = !nice_view_animation && IS_ENABLED(CONFIG_NICE_VIEW_ANIMATION);
         nice_view_theme_redraw();
         break;
     default:

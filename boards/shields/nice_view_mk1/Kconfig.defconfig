@@ -1,8 +1,10 @@
 if SHIELD_NICE_VIEW_MK1
 
-# Event-driven screen: 100ms tick (vs ZMK's 10ms) cuts idle wakeups 10x
+# Event-driven screen: 100ms tick (vs ZMK's 10ms) cuts idle wakeups 10x.
+# Only always-animating builds get the ~30fps tick; toggle builds
+# (AUTOSTART=n) keep the battery tick and play at ~10fps.
 config ZMK_DISPLAY_TICK_PERIOD_MS
-    default 33 if NICE_VIEW_ANIMATION
+    default 33 if NICE_VIEW_ANIMATION_AUTOSTART
     default 100
 
 config LV_Z_VDB_SIZE
@@ -40,10 +42,16 @@ config NICE_VIEW_MK1_WPM_FIXED_RANGE_MAX
     int "Fixed range maximum for WPM gauge/chart"
     default 100
 
-# default n = single static frame (battery)
+# n = static frame only (animation code compiled out)
 config NICE_VIEW_ANIMATION
-    bool "Animate the peripheral artwork (vs. a single static frame)"
+    bool "Compile the artwork animation (NVC_PAUSE toggles play/stop)"
     default n
+
+# n = boot paused on a static frame (NVC_PAUSE starts the show)
+config NICE_VIEW_ANIMATION_AUTOSTART
+    bool "Start animating at boot"
+    depends on NICE_VIEW_ANIMATION
+    default y
 
 # y = only transmutation's bitmaps compiled + theme locked (slim flash)
 config NICE_VIEW_MK1_TRANSMUTATION_ONLY

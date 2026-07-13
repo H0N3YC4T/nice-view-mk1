@@ -21,9 +21,19 @@ between. On the module side nothing was needed: the peripheral listener, redraw 
 locality were already correct. In static mode (`NICE_VIEW_ANIMATION=n`) NVC_NEXT/PREV pick a
 random frame of the next/prev theme; NVC_PAUSE reshuffles the current theme's frame.
 
+**Play/stop toggle (2026-07-13):** NVC_PAUSE now toggles the animation instead of only
+reshuffling the frame. `NICE_VIEW_ANIMATION=y` compiles the animation engine;
+new `NICE_VIEW_ANIMATION_AUTOSTART` (default y) picks the boot state -- the halves run
+`AUTOSTART=n` so they boot paused on a random static frame and NVC_PAUSE starts/stops the
+show. NVC_NEXT/PREV keep the current play state across theme changes; stopping lands on a
+fresh random frame (the animimg frame index isn't exposed to freeze in place). In a
+static-only build (`ANIMATION=n`) NVC_PAUSE still just reshuffles.
+
 **Battery:** `ZMK_DISPLAY_TICK_PERIOD_MS` defaults to 100ms for this shield (ZMK default is
 10ms -- 100 display-thread wakeups/second driving lv_task_handler for a screen that only
-changes on events). 33ms when `NICE_VIEW_ANIMATION=y` so the loop stays ~30fps.
+changes on events). 33ms only when `NICE_VIEW_ANIMATION_AUTOSTART=y` (always-animating
+builds); toggle builds keep the 100ms battery tick, so a playing animation updates at ~10fps
+-- the paused battery profile is unchanged from the static build.
 
 ## Extraction + rename (2026-07-11)
 

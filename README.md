@@ -37,7 +37,10 @@ Six frame sets ship in `boards/shields/nice_view_mk1/assets/animations/`: transm
 (default), crystal, landscape, evangelion, omnissiah, ultramar. By default peripherals show a
 single static transmutation frame
 (`NICE_VIEW_MK1_TRANSMUTATION_ONLY=y` compiles only that theme's bitmaps to save flash;
-`NICE_VIEW_ANIMATION=n` keeps it static to save battery). **Theme switching over the split works — wired and hardware-verified 2026-07-12** (root cause of it never working: the behavior node's 15-char
+`NICE_VIEW_ANIMATION=n` compiles the animation engine out to save battery). With
+`NICE_VIEW_ANIMATION=y` the NVC_PAUSE hotkey toggles play/stop at runtime;
+`NICE_VIEW_ANIMATION_AUTOSTART=n` boots paused on a static frame (battery profile of the
+static build until you press play). **Theme switching over the split works — wired and hardware-verified 2026-07-12** (root cause of it never working: the behavior node's 15-char
 name was truncated by the BLE relay — see the node-name rule above; set
 `NICE_VIEW_MK1_TRANSMUTATION_ONLY=n` on the halves so there is something to switch to). The
 old reference attempt lives on the keyboard repo's `dev/periph-theme` branch.
