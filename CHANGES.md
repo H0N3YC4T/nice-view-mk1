@@ -16,10 +16,15 @@ LOG_ERR nobody had enabled. Same constraint upstream documents on its own reset 
 
 **Fix (keyboard-repo side):** rename the keymap NODE to `nvcycle` (7 chars) -- the C label
 `cycle_animation:` and every `&cycle_animation NVC_*` binding stay unchanged. Also set
-`NICE_VIEW_MK1_TRANSMUTATION_ONLY=n` on the halves so all six themes are compiled to switch
+`NICE_VIEW_MK1_TRANSMUTATION_ONLY=n` on the halves so all themes are compiled to switch
 between. On the module side nothing was needed: the peripheral listener, redraw path and
 locality were already correct. In static mode (`NICE_VIEW_ANIMATION=n`) NVC_NEXT/PREV pick a
 random frame of the next/prev theme; NVC_PAUSE reshuffles the current theme's frame.
+
+**Theme trim (2026-07-13):** crystal and ultramar dropped from the rotation on request --
+removed from the enum, asset tables, Kconfig choice and CMake; the frame sources stay on
+disk (recoverable by reverting this commit). Rotation is now transmutation / landscape /
+evangelion / omnissiah; fallback theme is transmutation.
 
 **Play/stop toggle (2026-07-13):** NVC_PAUSE now toggles the animation instead of only
 reshuffling the frame. `NICE_VIEW_ANIMATION=y` compiles the animation engine;

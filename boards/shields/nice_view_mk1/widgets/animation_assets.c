@@ -8,44 +8,6 @@
 
 #if !CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY
 // -------------------------------------------------------------------------------
-// crystal theme (assets/animations/crystal.c)
-LV_IMG_DECLARE(crystal_01);
-LV_IMG_DECLARE(crystal_02);
-LV_IMG_DECLARE(crystal_03);
-LV_IMG_DECLARE(crystal_04);
-LV_IMG_DECLARE(crystal_05);
-LV_IMG_DECLARE(crystal_06);
-LV_IMG_DECLARE(crystal_07);
-LV_IMG_DECLARE(crystal_08);
-LV_IMG_DECLARE(crystal_09);
-LV_IMG_DECLARE(crystal_10);
-LV_IMG_DECLARE(crystal_11);
-LV_IMG_DECLARE(crystal_12);
-LV_IMG_DECLARE(crystal_13);
-LV_IMG_DECLARE(crystal_14);
-LV_IMG_DECLARE(crystal_15);
-LV_IMG_DECLARE(crystal_16);
-
-static const lv_img_dsc_t *crystal_imgs[] = {
-    &crystal_01,
-    &crystal_02,
-    &crystal_03,
-    &crystal_04,
-    &crystal_05,
-    &crystal_06,
-    &crystal_07,
-    &crystal_08,
-    &crystal_09,
-    &crystal_10,
-    &crystal_11,
-    &crystal_12,
-    &crystal_13,
-    &crystal_14,
-    &crystal_15,
-    &crystal_16,
-};
-
-// -------------------------------------------------------------------------------
 // landscape theme (assets/animations/landscape.c)
 LV_IMG_DECLARE(landscape_01);
 LV_IMG_DECLARE(landscape_03);
@@ -221,75 +183,6 @@ static const lv_img_dsc_t *omnissiah_imgs[] = {
     &omnissiah_32,
 };
 
-// -------------------------------------------------------------------------------
-// ultramar theme (assets/animations/ultramar.c)
-LV_IMG_DECLARE(ultramar_01);
-LV_IMG_DECLARE(ultramar_02);
-LV_IMG_DECLARE(ultramar_03);
-LV_IMG_DECLARE(ultramar_04);
-LV_IMG_DECLARE(ultramar_05);
-LV_IMG_DECLARE(ultramar_06);
-LV_IMG_DECLARE(ultramar_07);
-LV_IMG_DECLARE(ultramar_08);
-LV_IMG_DECLARE(ultramar_09);
-LV_IMG_DECLARE(ultramar_10);
-LV_IMG_DECLARE(ultramar_11);
-LV_IMG_DECLARE(ultramar_12);
-LV_IMG_DECLARE(ultramar_13);
-LV_IMG_DECLARE(ultramar_14);
-LV_IMG_DECLARE(ultramar_15);
-LV_IMG_DECLARE(ultramar_16);
-LV_IMG_DECLARE(ultramar_17);
-LV_IMG_DECLARE(ultramar_18);
-LV_IMG_DECLARE(ultramar_19);
-LV_IMG_DECLARE(ultramar_20);
-LV_IMG_DECLARE(ultramar_21);
-LV_IMG_DECLARE(ultramar_22);
-LV_IMG_DECLARE(ultramar_23);
-LV_IMG_DECLARE(ultramar_24);
-LV_IMG_DECLARE(ultramar_25);
-LV_IMG_DECLARE(ultramar_26);
-LV_IMG_DECLARE(ultramar_27);
-LV_IMG_DECLARE(ultramar_28);
-LV_IMG_DECLARE(ultramar_29);
-LV_IMG_DECLARE(ultramar_30);
-LV_IMG_DECLARE(ultramar_31);
-LV_IMG_DECLARE(ultramar_32);
-
-static const lv_img_dsc_t *ultramar_imgs[] = {
-    &ultramar_01,
-    &ultramar_02,
-    &ultramar_03,
-    &ultramar_04,
-    &ultramar_05,
-    &ultramar_06,
-    &ultramar_07,
-    &ultramar_08,
-    &ultramar_09,
-    &ultramar_10,
-    &ultramar_11,
-    &ultramar_12,
-    &ultramar_13,
-    &ultramar_14,
-    &ultramar_15,
-    &ultramar_16,
-    &ultramar_17,
-    &ultramar_18,
-    &ultramar_19,
-    &ultramar_20,
-    &ultramar_21,
-    &ultramar_22,
-    &ultramar_23,
-    &ultramar_24,
-    &ultramar_25,
-    &ultramar_26,
-    &ultramar_27,
-    &ultramar_28,
-    &ultramar_29,
-    &ultramar_30,
-    &ultramar_31,
-    &ultramar_32,
-};
 #endif /* !CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY */
 
 // -------------------------------------------------------------------------------
@@ -297,11 +190,9 @@ static const lv_img_dsc_t *ultramar_imgs[] = {
 const lv_img_dsc_t * const *nice_view_anim_sets[NICE_VIEW_THEME_COUNT] = {
     [NICE_VIEW_THEME_TRANSMUTATION] = transmutation_imgs,
 #if !CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY
-    [NICE_VIEW_THEME_CRYSTAL]       = crystal_imgs,
     [NICE_VIEW_THEME_LANDSCAPE]     = landscape_imgs,
     [NICE_VIEW_THEME_EVANGELION]    = evangelion_imgs,
     [NICE_VIEW_THEME_OMNISSIAH]     = omnissiah_imgs,
-    [NICE_VIEW_THEME_ULTRAMAR]      = ultramar_imgs,
 #endif
 };
 
@@ -309,11 +200,9 @@ const lv_img_dsc_t * const *nice_view_anim_sets[NICE_VIEW_THEME_COUNT] = {
 const size_t nice_view_anim_lengths[NICE_VIEW_THEME_COUNT] = {
     [NICE_VIEW_THEME_TRANSMUTATION] = NICE_VIEW_ANIM_ARRAY_SIZE(transmutation_imgs),
 #if !CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY
-    [NICE_VIEW_THEME_CRYSTAL]       = NICE_VIEW_ANIM_ARRAY_SIZE(crystal_imgs),
     [NICE_VIEW_THEME_LANDSCAPE]     = NICE_VIEW_ANIM_ARRAY_SIZE(landscape_imgs),
     [NICE_VIEW_THEME_EVANGELION]    = NICE_VIEW_ANIM_ARRAY_SIZE(evangelion_imgs),
     [NICE_VIEW_THEME_OMNISSIAH]     = NICE_VIEW_ANIM_ARRAY_SIZE(omnissiah_imgs),
-    [NICE_VIEW_THEME_ULTRAMAR]      = NICE_VIEW_ANIM_ARRAY_SIZE(ultramar_imgs),
 #endif
 };
 
@@ -321,10 +210,8 @@ const size_t nice_view_anim_lengths[NICE_VIEW_THEME_COUNT] = {
 // Per-theme per-frame dwell time (ms). Animations play fast/smooth; slideshows
 // (landscape, evangelion) hold each image for several seconds.
 const uint32_t nice_view_anim_frame_ms[NICE_VIEW_THEME_COUNT] = {
-    [NICE_VIEW_THEME_CRYSTAL]       = 33,     // animation (~30 fps)
     [NICE_VIEW_THEME_LANDSCAPE]     = 15000,  // slideshow (15 s/frame)
     [NICE_VIEW_THEME_EVANGELION]    = 15000,  // slideshow (15 s/frame)
     [NICE_VIEW_THEME_TRANSMUTATION] = 66,     // animation (~15 fps)
     [NICE_VIEW_THEME_OMNISSIAH]     = 33,     // animation (~30 fps)
-    [NICE_VIEW_THEME_ULTRAMAR]      = 33,     // animation (~30 fps)
 };

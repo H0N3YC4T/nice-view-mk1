@@ -61,8 +61,6 @@ config NICE_VIEW_MK1_TRANSMUTATION_ONLY
 choice NICE_VIEW_ANIMATION_THEME
     prompt "Default peripheral animation theme"
     default NICE_VIEW_ANIMATION_THEME_TRANSMUTATION
-config NICE_VIEW_ANIMATION_THEME_CRYSTAL
-    bool "Crystal"
 config NICE_VIEW_ANIMATION_THEME_LANDSCAPE
     bool "Landscape (dunes / pyramids / mountains)"
 config NICE_VIEW_ANIMATION_THEME_EVANGELION
@@ -71,8 +69,6 @@ config NICE_VIEW_ANIMATION_THEME_TRANSMUTATION
     bool "Transmutation"
 config NICE_VIEW_ANIMATION_THEME_OMNISSIAH
     bool "Omnissiah"
-config NICE_VIEW_ANIMATION_THEME_ULTRAMAR
-    bool "Ultramar"
 endchoice
 
 config NICE_VIEW_WIDGET_STATUS

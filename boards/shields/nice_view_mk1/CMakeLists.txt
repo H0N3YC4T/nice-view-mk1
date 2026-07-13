@@ -16,11 +16,9 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_VIEW_WIDGET_STATUS)
     # TEMP (CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY): gate out the other theme
     # bitmaps to slim the peripheral build. Set the Kconfig to n to restore them.
     if(NOT CONFIG_NICE_VIEW_MK1_TRANSMUTATION_ONLY)
-      zephyr_library_sources(assets/animations/crystal.c)
       zephyr_library_sources(assets/animations/landscape.c)
       zephyr_library_sources(assets/animations/evangelion.c)
       zephyr_library_sources(assets/animations/omnissiah.c)
-      zephyr_library_sources(assets/animations/ultramar.c)
     endif()
     zephyr_library_sources(widgets/animation.c)
     zephyr_library_sources(widgets/animation_assets.c)
